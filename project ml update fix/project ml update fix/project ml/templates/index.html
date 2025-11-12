@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacking Model Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS to add transition effects */
+        .transition-bg:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-blue-200 to-indigo-400 font-sans flex items-center justify-center min-h-screen py-12">
+
+    <div class="bg-white shadow-2xl rounded-xl w-full max-w-xl p-8">
+        <h1 class="text-3xl font-bold text-center text-blue-900 mb-8">Mental Health Prediction</h1>
+
+        <p class="text-gray-700 text-lg mb-6 text-center">
+            Please fill out the form below to help us predict mental health conditions in the workplace. Your responses will assist us in analyzing various factors such as age, gender, family history, and more to provide deeper insights into mental health predictions.
+        </p>
+
+        <form id="predictionForm" class="space-y-6">
+            <!-- Input Fields -->
+            <div>
+                <label for="age" class="block text-gray-700 font-medium">Age</label>
+                <input type="number" id="age" placeholder="Enter your age"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+
+            <div>
+                <label for="gender" class="block text-gray-700 font-medium">Gender</label>
+                <select id="gender"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="family_history" class="block text-gray-700 font-medium">Has anyone in your family had mental health issues?</label>
+                <select id="family_history"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="benefits" class="block text-gray-700 font-medium">Does your company provide mental health benefits?</label>
+                <select id="benefits"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="care_options" class="block text-gray-700 font-medium">Are mental health care options available at your workplace?</label>
+                <select id="care_options"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="anonymity" class="block text-gray-700 font-medium">Is the mental health support provided anonymous?</label>
+                <select id="anonymity"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="leave" class="block text-gray-700 font-medium">How easy is it to take mental health leave?</label>
+                <select id="leave"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Difficult">Difficult</option>
+                    <option value="Don't know">Don't know</option>
+                </select>
+            </div>
+
+            <!-- Updated work interference questions -->
+            <div>
+                <label for="work_interfere_stress" class="block text-gray-700 font-medium">Does your work cause you stress?</label>
+                <select id="work_interfere_stress"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Never">Never</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="work_interfere_workload" class="block text-gray-700 font-medium">Does your workload contribute to your mental health struggles?</label>
+                <select id="work_interfere_workload"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Never">Never</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="work_interfere_environment" class="block text-gray-700 font-medium">Does your workplace environment affect your mental health?</label>
+                <select id="work_interfere_environment"
+                    class="w-full p-4 border-2 border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Option</option>
+                    <option value="Never">Never</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Often">Often</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                class="w-full p-4 bg-gradient-to-r from-teal-400 to-cyan-600 text-white font-semibold rounded-lg transition-all hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400">Predict</button>
+        </form>
+
+        <div id="result" class="text-center mt-6 text-xl"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#predictionForm').submit(function (event) {
+                event.preventDefault();
+
+                var features = {
+                    age: parseFloat($('#age').val()),
+                    gender: $('#gender').val(),
+                    family_history: $('#family_history').val(),
+                    benefits: $('#benefits').val(),
+                    care_options: $('#care_options').val(),
+                    anonymity: $('#anonymity').val(),
+                    leave: $('#leave').val(),
+                    work_interfere_stress: $('#work_interfere_stress').val(),
+                    work_interfere_workload: $('#work_interfere_workload').val(),
+                    work_interfere_environment: $('#work_interfere_environment').val()
+                };
+
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(features),
+                    success: function (response) {
+                        var prediction = response.prediction;
+                        if (prediction == 0) {
+                            $('#result').html('Mental Health is Stable. <br> Maintain a healthy lifestyle, manage stress well, and keep communicating with your support system to ensure your mental well-being stays strong.').css('color', '#28a745');
+                        } else if (prediction == 1) {
+                            $('#result').html('Mental Health at Risk. <br> It is recommended to seek professional help, such as counseling or therapy, and discuss your condition with HR or your supervisor for appropriate support.').css('color', '#dc3545');
+                        }
+                    },
+                    error: function () {
+                        $('#result').text('Error in prediction. Please try again.').css('color', 'red');
+                    }
+                });
+
+            });
+        });
+    </script>
+</body>
+
+</html>
