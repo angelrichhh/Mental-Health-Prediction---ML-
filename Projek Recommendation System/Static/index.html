@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Recommendation</title>
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="Judul">Song Recommendation</div>
+        <div class="content">
+            <img src="logo.svg" class="Logo" alt="Logo">
+            <div>
+                <!-- Search -->
+                <div class="search-container">
+                    <input type="text" id="songInput" class="search-bar" placeholder="Search Song Title or ID">
+                    <button class="search-button" onclick="getRecommendations()">Search</button>
+                </div>                
+
+                <!-- Song Information (Hidden Initially) -->
+                <div id="songInfo" class="song-info" style="display: none;">
+                    <h3>Your Search</h3>
+                    <div class="title-song"><strong>Title:</strong> <span id="songTitle"></span></div>
+                    <div class="id-song"><strong>ID:</strong> <span id="songId"></span></div>
+                    <div class="duration-main"><strong>Duration:</strong> <span id="songDuration"></span></div>
+                    <div class="spotify-link">
+                        <img src="spotify.png" alt="Spotify Logo" style="width: 22px; height: 22px">
+                        <a id="spotifyLink" href="https://open.spotify.com/" target="_blank">Listen on Spotify</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendation Songs -->
+        <div class="recommendation">Recommended Similar Songs for You</div>
+        <div id="results" class="results"></div> 
+
+    </div>
+
+    <script>
+        function getRecommendations() {
+            let songInput = document.getElementById("songInput").value.trim();
+            
+            if (!songInput) {
+                alert("Please enter a song title or ID!");
+                return;
+            }
+
+            fetch("/recommend", {  
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ song: songInput })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Server error: " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("results").innerHTML = `<p style="color: red;">${data.error}</p>`;
+                    document.getElementById("songInfo").style.display = "none";
+                    return;
+                }
+
+                document.getElementById("songTitle").textContent = data.input_song;
+                document.getElementById("songId").textContent = data.recommendations.length > 0 ? data.recommendations[0].id : "Unknown";
+                document.getElementById("songDuration").textContent = data.recommendations.length > 0 ? data.recommendations[0].duration : "Unknown";
+
+                document.getElementById("songInfo").style.display = "block";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("results").innerHTML = `<p style="color: red;">An error occurred. Please try again later.</p>`;
+            });
+        }
+    </script>       
+</body>
+</html>
